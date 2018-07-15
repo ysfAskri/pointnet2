@@ -40,7 +40,10 @@ Then, add flags of `-I$TF_INC/external/nsync/public -L$TF_LIB -ltensorflow_frame
 
 #### Shape Classification
         
-        export LD_LIBRARY_PATH=/usr/local/cuda-9.0/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+        export PATH=${PATH}:/usr/local/cuda-9.0/bin
+        export CUDA_HOME=${CUDA_HOME}:/usr/local/cuda:/usr/local/cuda-9.0
+        export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda-9.0/lib64
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 
 To train a PointNet++ model to classify ModelNet40 shapes (using point clouds with XYZ coordinates):
 
