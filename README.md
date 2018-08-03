@@ -24,6 +24,32 @@ In this repository we release code and data for our PointNet++ classification an
 
 Install <a href="https://www.tensorflow.org/install/">TensorFlow</a>. The code is tested under TF1.2 GPU version and Python 2.7 (version 3 should also work) on Ubuntu 14.04. There are also some dependencies for a few Python libraries for data processing and visualizations like `cv2`, `h5py` etc. It's highly recommended that you have access to GPUs.
 
+#### TF for C++
+
+        sudo apt install bazel
+        git clone --recursive https://github.com/tensorflow/tensorflow
+        ./tensorflow/contrib/makefile/build_all_linux.sh
+        ./configure
+        bazel build //tensorflow:libtensorflow_cc.so
+
+        sudo mkdir /usr/local/tensorflow
+        sudo mkdir /usr/local/tensorflow/include
+        sudo cp -r tensorflow/contrib/makefile/downloads/eigen/Eigen /usr/local/tensorflow/include/
+        sudo cp -r tensorflow/contrib/makefile/downloads/eigen/unsupported /usr/local/tensorflow/include/
+        sudo cp -r tensorflow/contrib/makefile/gen/protobuf/include/google /usr/local/tensorflow/include/
+        sudo cp tensorflow/contrib/makefile/downloads/nsync/public/* /usr/local/tensorflow/include/
+        sudo cp -r bazel-genfiles/tensorflow /usr/local/tensorflow/include/
+        sudo cp -r tensorflow/cc /usr/local/tensorflow/include/tensorflow
+        sudo cp -r tensorflow/core /usr/local/tensorflow/include/tensorflow
+        sudo mkdir /usr/local/tensorflow/include/third_party
+        sudo cp -r third_party/eigen3 /usr/local/tensorflow/include/third_party/
+        sudo mkdir /usr/local/tensorflow/lib
+        sudo cp bazel-bin/tensorflow/libtensorflow_*.so /usr/local/tensorflow/lib
+        
+Eclipse Run configuration Environement or bachrc variable:
+
+        LD_LIBRARY_PATH=/usr/local/tensorflow/lib
+
 #### Compile Customized TF Operators
 The TF operators are included under `tf_ops`, you need to compile them (check `tf_xxx_compile.sh` under each ops subfolder) first. Update `nvcc` and `python` path if necessary. The code is tested under TF1.2.0. If you are using earlier version it's possible that you need to remove the `-D_GLIBCXX_USE_CXX11_ABI=0` flag in g++ command in order to compile correctly.
 
