@@ -27,6 +27,8 @@ Install <a href="https://www.tensorflow.org/install/">TensorFlow</a>. The code i
 #### TF for C++
 
         sudo apt install bazel
+        sudo apt-get install build-essential libtool autoconf automake
+        
         git clone --recursive https://github.com/tensorflow/tensorflow
         ./tensorflow/contrib/makefile/build_all_linux.sh
         ./configure
